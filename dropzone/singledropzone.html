@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <title>Title</title>
+    <style>
+        body{
+  font-family: sans-serif;
+
+  color: #000;
+}
+.wrapper{
+  text-align:center;
+}
+.wrapper h2 {
+    padding-bottom: 20px;
+    font-weight: 500;
+    font-size: 22px;
+}
+.wrapper #file-input{
+  display:none;
+}
+
+.wrapper label[for='file-input'] *{
+  vertical-align:middle;
+  cursor:pointer;
+}
+
+.wrapper label[for='file-input'] span{
+  margin-left: 10px
+}
+
+.wrapper i.remove{
+  vertical-align:middle;
+  margin-left: 5px;
+  cursor:pointer;
+  display:none;
+}
+h2.title_sec {
+    text-align: center;
+    font-size: 25px;
+    font-weight: 500;
+    font-family: 'Open Sans', sans-serif;
+    color: #a50f0f;
+    text-transform: uppercase;
+}
+    </style>
+    <style>
+  .Custom {
+    border: 3px dashed #a1a7a4;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 20px 0 20px;
+}
+.Custom .fa-paperclip {
+    color: #00c3ff;
+}
+    </style>
+</head>
+<body>
+<h2 class="title_sec">Single Image Dropzone</h2>
+<div class="wrapper ">
+    <div class="Custom">
+  <h2>Custom File Input</h2>
+  <input type="file" id="file-input">
+  <label for="file-input">
+    <i class="fa fa-paperclip fa-2x"></i>
+    <span></span>
+  </label>
+  <i class="fa fa-times-circle remove"></i>
+        </div>
+</div>
+</body>
+</html>
+
+<script>
+    $('document').ready(function(){
+
+  var $file = $('#file-input'),
+      $label = $file.next('label'),
+      $labelText = $label.find('span'),
+      $labelRemove = $('i.remove'),
+      labelDefault = $labelText.text();
+
+  // on file change
+  $file.on('change', function(event){
+    var fileName = $file.val().split( '\\' ).pop();
+    if( fileName ){
+      console.log($file)
+      $labelText.text(fileName);
+      $labelRemove.show();
+    }else{
+      $labelText.text(labelDefault);
+      $labelRemove.hide();
+    }
+  });
+
+  // Remove file
+  $labelRemove.on('click', function(event){
+    $file.val("");
+    $labelText.text(labelDefault);
+    $labelRemove.hide();
+    console.log($file)
+  });
+})
+</script>
